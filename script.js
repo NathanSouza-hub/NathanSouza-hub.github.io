@@ -1,14 +1,49 @@
 // Para adicionar um novo projeto, basta incluir um item na lista.
+// Com `destaque: true` o card ocupa a linha inteira; `imagem` é a captura de tela da capa.
 const projetos = [
   {
     titulo: "NT Driver",
     slug: "nt-driver",
     imagem: "img/nt-driver.png",
+    destaque: true,
     ano: "2026",
     descricao: "Sistema financeiro completo para motoristas de aplicativo, nascido da minha rotina na Uber, 99 e InDrive. Receitas, despesas, metas, histórico de registros, usuários e dashboard com indicadores. API REST com CRUD em Node.js e Express, com migração de SQLite para PostgreSQL preservando todo o histórico.",
     tecnologias: ["React", "Vite", "Node.js", "Express", "REST", "PostgreSQL", "SQLite"],
     demo: "https://nathansouza-hub.github.io/nt-driver-demo/",
     codigo: "https://github.com/NathanSouza-hub/Nt-driver",
+    privado: false,
+  },
+  {
+    titulo: "Minha Assistente",
+    slug: "minha-assistente",
+    imagem: "img/minha-assistente.png",
+    ano: "2026",
+    descricao: "App de assistente pessoal sob medida para uma cliente: pagamentos, compromissos, viagens, medicamentos e compras, com lembretes por Web Push. Fiz o back-end: 14 módulos, 22 migrations em PostgreSQL e 172 testes automatizados, com deploy via Docker e CI no GitHub Actions.",
+    tecnologias: ["Node.js", "Express", "PostgreSQL", "Knex", "JWT", "Zod", "Docker", "GitHub Actions"],
+    demo: "https://nathansouza-hub.github.io/minha-assistente-demo/",
+    codigo: "https://github.com/NathanSouza-hub/Minha-Assistente",
+    privado: false,
+  },
+  {
+    titulo: "Lory's Care",
+    slug: "loryscare",
+    imagem: "img/loryscare.png",
+    ano: "2026",
+    descricao: "Aplicação que centraliza a rotina de cuidados de uma pessoa idosa: sinais vitais, medicamentos, rotinas, agenda, plantões e anotações de enfermagem, com fichas para impressão. API própria com login por JWT e testes automatizados.",
+    tecnologias: ["Node.js", "Express", "PostgreSQL", "JWT", "JavaScript", "node:test"],
+    demo: "https://nathansouza-hub.github.io/loryscare-demo/",
+    codigo: "https://github.com/NathanSouza-hub/Loryscare",
+    privado: false,
+  },
+  {
+    titulo: "LabSystem",
+    slug: "labsystem",
+    imagem: "img/labsystem.png",
+    ano: "2026",
+    descricao: "Sistema de cadastro de produtos com autenticação completa: login com JWT em cookie httpOnly, senhas com bcrypt, API REST separada em camadas (rotas, serviços e repositório) e testes unitários com Jest.",
+    tecnologias: ["Node.js", "Express", "MySQL", "JWT", "bcrypt", "Jest", "JavaScript"],
+    demo: "https://nathansouza-hub.github.io/labsystem-demo/",
+    codigo: "https://github.com/NathanSouza-hub/labsystem",
     privado: false,
   },
   {
@@ -23,28 +58,6 @@ const projetos = [
     privado: true,
   },
   {
-    titulo: "Minha Assistente",
-    slug: "minha-assistente",
-    imagem: "",
-    ano: "2026",
-    descricao: "App de assistente pessoal sob medida para uma cliente: pagamentos, compromissos, viagens, medicamentos e compras, com lembretes por Web Push. Fiz o back-end: 14 módulos, 22 migrations em PostgreSQL e 172 testes automatizados, com deploy via Docker e CI no GitHub Actions.",
-    tecnologias: ["Node.js", "Express", "PostgreSQL", "Knex", "JWT", "Zod", "Docker", "GitHub Actions"],
-    demo: "https://nathansouza-hub.github.io/minha-assistente-demo/",
-    codigo: "https://github.com/NathanSouza-hub/Minha-Assistente",
-    privado: false,
-  },
-  {
-    titulo: "Lory's Care",
-    slug: "loryscare",
-    imagem: "",
-    ano: "2026",
-    descricao: "Aplicação que centraliza a rotina de cuidados de uma pessoa idosa: sinais vitais, medicamentos, rotinas, agenda, plantões e anotações de enfermagem, com fichas para impressão. API própria com login por JWT e testes automatizados.",
-    tecnologias: ["Node.js", "Express", "PostgreSQL", "JWT", "JavaScript", "node:test"],
-    demo: "https://nathansouza-hub.github.io/loryscare-demo/",
-    codigo: "https://github.com/NathanSouza-hub/Loryscare",
-    privado: false,
-  },
-  {
     titulo: "Souza Tech OS",
     slug: "souza-tech-os",
     imagem: "",
@@ -55,17 +68,6 @@ const projetos = [
     demo: "",
     codigo: "",
     privado: true,
-  },
-  {
-    titulo: "LabSystem",
-    slug: "labsystem",
-    imagem: "",
-    ano: "2026",
-    descricao: "Sistema de cadastro de produtos com autenticação completa: login com JWT em cookie httpOnly, senhas com bcrypt, API REST separada em camadas (rotas, serviços e repositório) e testes unitários com Jest.",
-    tecnologias: ["Node.js", "Express", "MySQL", "JWT", "bcrypt", "Jest", "JavaScript"],
-    demo: "https://nathansouza-hub.github.io/labsystem-demo/",
-    codigo: "https://github.com/NathanSouza-hub/labsystem",
-    privado: false,
   },
   {
     titulo: "Vizu",
@@ -171,8 +173,8 @@ function renderizarProjetos() {
 
     // Com imagem, mostra a captura de tela; sem imagem, mostra o "caminho" do projeto e o status
     const capa = criarElemento("div", "project-cover");
+    if (projeto.destaque) card.classList.add("destaque");
     if (projeto.imagem) {
-      card.classList.add("destaque");
       capa.classList.add("com-imagem");
       const img = criarElemento("img");
       img.src = projeto.imagem;
